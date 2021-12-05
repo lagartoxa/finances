@@ -11,11 +11,12 @@ Project I made to control my own finances and also study React and FastAPI.
 $ ./install
 ```
 
-**ATTENTION: ** The scripts don't check many things neither handle all the errors properly. Since my main goal here is to study React and FastAPI, I made them as simple as possible
-
 
 # How to Run
 ```
-$ ./run.sh
+$ ./run_backend.sh
+$ ./run_frontend.sh
 ```
+
+**ATTENTION: ** Since my main goal here is to study React and FastAPI, I made the scripts as simple as possible.
 
