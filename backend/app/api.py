@@ -60,3 +60,23 @@ def add_user(user: dict) -> dict:
         "success": True,
     }
 
+@app.put("/user/{id}", tags=["users", ])
+async def update_user(id: int, body: dict) -> dict:
+    for user in users:
+        if user["id"] == id:
+            user["login"] = body["login"]
+
+    return {
+        "success": True,
+    }
+
+@app.delete("/user/{id}", tags=["users", ])
+async def delete_user(id: int) -> dict:
+    for user in users:
+        if user["id"] == id:
+            users.remove(user)
+
+    return {
+        "success": True,
+    }
+

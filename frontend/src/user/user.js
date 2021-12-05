@@ -22,8 +22,8 @@ const AddUser = () => {
 
         fetch("http://localhost:8000/user", {
             method: "POST",
-            headers: { "Content-Type": "application/json", },
-            body: JSON.stringify(new_user)
+            headers: {"Content-Type": "application/json", },
+            body: JSON.stringify(new_user),
         }).then(fetchUsers);
     };
 
