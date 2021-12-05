@@ -4,7 +4,42 @@ const UsersContext = React.createContext({
     users: [], fetchUsers: () => {}
 });
 
-export default function Users() {
+const AddUser = () => {
+    const [item, setItem] = React.useState('');
+    const {users, fetchUsers} = React.useContext(UsersContext);
+
+    const handleInput = event => {
+        setItem(event.target.value);
+    };
+
+    const handleSubmit = (event) => {
+        const new_user = {
+            "id": users.length + 1,
+            "login": item,
+        };
+
+        console.log("NEW USER ", new_user, " ITEM: ", item);
+
+        fetch("http://localhost:8000/user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", },
+            body: JSON.stringify(new_user)
+        }).then(fetchUsers);
+    };
+
+    return (
+        <div>
+            <form onSubmit={handleSubmit}>
+                <input
+                    onChange={handleInput}
+                    placeholder="Type new login here"
+                />
+            </form>
+        </div>
+    );
+}
+
+const Users = () => {
     const [users, setUsers] = useState([]);
     const fetchUsers = async () => {
         const response = await fetch("http://localhost:8000/users");
@@ -18,10 +53,13 @@ export default function Users() {
 
     return (
         <UsersContext.Provider value={{users, fetchUsers}}>
+            <AddUser />
             {users.map((user) => (
                 <p>{user.login}</p>
             ))}
         </UsersContext.Provider>
     );
 }
+
+export default Users;
 

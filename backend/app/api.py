@@ -26,24 +26,37 @@ app.add_middleware(
 )
 
 
+users = [
+    {
+        "id": 1,
+        "login": "admin",
+    },
+    {
+        "id": 2,
+        "login": "ildomar",
+    },
+]
+
 @app.get('/', tags=["root", ])
 async def root() -> dict:
     return {
+        "success": True,
         "message": "First Version",
     }
 
-@app.get('/users', tags=["user", ])
+@app.get('/users', tags=["users", ])
 async def get_users() -> dict:
     return {
-        "users": [
-            {
-                "id": 1,
-                "login": "admin",
-            },
-            {
-                "id": 2,
-                "login": "ildomar",
-            },
-        ],
+        "success": True,
+        "users": users,
+    }
+
+@app.post("/user", tags=["users", ])
+def add_user(user: dict) -> dict:
+    users.append(user)
+    print("USER: ", user)
+
+    return {
+        "success": True,
     }
 

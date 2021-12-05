@@ -1,7 +1,7 @@
 import './App.css';
 import Users from "./user/user";
 
-function App() {
+const App = () => {
   return (
       <div>
           <Users />
@@ -10,3 +10,4 @@ function App() {
 }
 
 export default App;
+
