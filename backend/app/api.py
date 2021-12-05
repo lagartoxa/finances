@@ -32,3 +32,18 @@ async def root() -> dict:
         "message": "First Version",
     }
 
+@app.get('/users', tags=["user", ])
+async def get_users() -> dict:
+    return {
+        "users": [
+            {
+                "id": 1,
+                "login": "admin",
+            },
+            {
+                "id": 2,
+                "login": "ildomar",
+            },
+        ],
+    }
+
