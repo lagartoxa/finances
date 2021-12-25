@@ -8,6 +8,7 @@ Project I made to control my own finances and also study React and FastAPI.
 
 # How to Install
  - Create a user 'project' with password 'project' on postgres and a database called 'finances'. (TODO: make the database more secure)
+
 **ATTENTION:** you must create the user and the database before running the installation script, because the script will create the tables in the database.
 
 ```
@@ -29,7 +30,7 @@ The database migrations are managed with Alembic. You can run alembic to create 
 ```
 $ ./scripts/alembic.sh revision "XXX - My new migration"
 $ ./scripts/alembic.sh upgrade head
-... you may use any alembic options you need ...
+... you can use any alembic options has ...
 ```
 
 ## Naming the Migrations
