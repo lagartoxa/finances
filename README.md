@@ -5,6 +5,8 @@ TODO: find a better name xD
 # Description
 Project I made to control my own finances and also study React and FastAPI.
 
+## The Road so Far
+I'm still finishing the structure. So far I have integration with SQLAlchemy, Alembic, React and some basic installation scripts but no real feature yet.
 
 # How to Install
  - Create a user 'project' with password 'project' on postgres and a database called 'finances'. (TODO: make the database more secure)
