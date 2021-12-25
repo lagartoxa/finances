@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 
-##############################################################################
-# @Author: Ildomar Carvalho
-# @Email:  ildomar.carvalho@accenture.com
-# @Date:   2021-12-04 11:12:42
-##############################################################################
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
