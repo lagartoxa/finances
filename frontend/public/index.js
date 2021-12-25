@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Users } from "../src";
+import { Header } from "../src";
 
 
 const App = () => {
-    return <Users />
+    return <Header />
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("header"));
 
