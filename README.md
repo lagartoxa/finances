@@ -35,7 +35,3 @@ $ ./scripts/alembic.sh upgrade head
 ... you can use any alembic options has ...
 ```
 
-## Naming the Migrations
-
-When creating new revisions, please number them by using the pattern "XXX - Here you comment your migration", where XXX is the number of the migration.
-
