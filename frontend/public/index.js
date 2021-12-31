@@ -1,10 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Header } from "../src";
+import { Header, Sidebar } from "../src";
 
 
 const App = () => {
-    return <Header />
+    return (
+        <div>
+            <Header />
+            <Sidebar />
+        </div>
+    )
 }
 
 ReactDOM.render(<App />, document.getElementById("header"));

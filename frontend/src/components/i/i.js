@@ -8,9 +8,10 @@ import React from "react";
  *  - content: HTML element or component to be shown
  */
 
-export const I = ({ css_class }) => {
+export const I = ({ css_class, content }) => {
     return (
         <i className={css_class}>
+            {content}
         </i>
     )
 }
