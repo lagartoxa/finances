@@ -24,7 +24,7 @@ from backend.schemas.token import TokenAPISchema
 router = APIRouter(tags=["user", ])
 
 
-@router.post("/user/", tags=["user", ], response_model=APISchema)
+@router.post("/user", tags=["user", ], response_model=APISchema)
 async def create_user(request: UserSchema, db_session: Session = Depends(db_session)):
     user = User()
 
@@ -42,7 +42,7 @@ async def create_user(request: UserSchema, db_session: Session = Depends(db_sess
     }
 
 
-@router.post("/login", tags=["login", ], response_model=TokenAPISchema)
+@router.post("/login", tags=["user", ], response_model=TokenAPISchema)
 async def login(request: OAuth2PasswordRequestForm = Depends(), db_session: Session = Depends(db_session)):
     user = UserRepository(db_session).one_or_none(login=request.username)
 
