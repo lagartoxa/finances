@@ -10,7 +10,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 
 from sqlalchemy.orm import Session
 
-from backend.authentication.token import LocalAuthentication
+from backend.authentication.token import create_token
 
 from backend.db.models import User
 from backend.db.models.database import db_session
@@ -52,7 +52,7 @@ async def login(request: OAuth2PasswordRequestForm = Depends(), db_session: Sess
     if not user.verify_password(request.password):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
 
-    token = LocalAuthentication().create_token({"sub": user.login})
+    token = create_token({"sub": user.login})
 
     return {
         "success": True,

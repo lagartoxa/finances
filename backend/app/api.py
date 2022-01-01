@@ -8,7 +8,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from sqlalchemy.orm import Session
 
+from backend.authentication.token import get_current_user
 from backend.routers import user
+from backend.schemas.user import UserSchema
 
 
 app = FastAPI()
@@ -29,7 +31,7 @@ app.add_middleware(
 
 
 @app.get('/', tags=["root", ])
-async def root() -> dict:
+async def root(current_user: UserSchema = Depends(get_current_user)) -> dict:
     return {
         "success": True,
         "message": "First Version",
