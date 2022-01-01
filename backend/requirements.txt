@@ -1,4 +1,9 @@
+cryptography
 fastapi
+openpyxl
+passlib
+psycopg2
+python-jose
 sqlalchemy
 uvicorn
 

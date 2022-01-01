@@ -24,6 +24,15 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 
+def db_session():
+    db = SessionLocal()
+
+    try:
+        yield db
+    finally:
+        db.close()
+
+
 class BaseTable(Base):
     __abstract__ = True
 

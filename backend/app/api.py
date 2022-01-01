@@ -1,10 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from fastapi import FastAPI
+from fastapi import (
+    Depends,
+    FastAPI
+)
 from fastapi.middleware.cors import CORSMiddleware
+
+from sqlalchemy.orm import Session
+
+from backend.routers import user
 
 
 app = FastAPI()
+app.include_router(user.router)
 
 origins = [
     "http://localhost:3000",
@@ -20,57 +28,10 @@ app.add_middleware(
 )
 
 
-users = [
-    {
-        "id": 1,
-        "login": "admin",
-    },
-    {
-        "id": 2,
-        "login": "ildomar",
-    },
-]
-
 @app.get('/', tags=["root", ])
 async def root() -> dict:
     return {
         "success": True,
         "message": "First Version",
-    }
-
-@app.get('/users', tags=["users", ])
-async def get_users() -> dict:
-    return {
-        "success": True,
-        "users": users,
-    }
-
-@app.post("/user", tags=["users", ])
-def add_user(user: dict) -> dict:
-    users.append(user)
-    print("USER: ", user)
-
-    return {
-        "success": True,
-    }
-
-@app.put("/user/{id}", tags=["users", ])
-async def update_user(id: int, body: dict) -> dict:
-    for user in users:
-        if user["id"] == id:
-            user["login"] = body["login"]
-
-    return {
-        "success": True,
-    }
-
-@app.delete("/user/{id}", tags=["users", ])
-async def delete_user(id: int) -> dict:
-    for user in users:
-        if user["id"] == id:
-            users.remove(user)
-
-    return {
-        "success": True,
     }
 

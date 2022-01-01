@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from passlib.context import CryptContext
 from sqlalchemy import (
     Column,
     String,
@@ -29,4 +30,13 @@ class User(BaseTable):
             name="project_user_email_rm_timestamp_un"
         ),
     )
+
+    def get_encrypt_context(self):
+        return CryptContext(schemes =["bcrypt"],deprecated="auto")
+
+    def encrypt_password(self, password):
+        return self.get_encrypt_context().hash(password)
+
+    def verify_password(self, unhashed_password):
+        return self.get_encrypt_context().verify(unhashed_password, self.password)
 

@@ -3,9 +3,7 @@
 from pydantic import BaseModel
 
 
-class UserSchema(BaseModel):
-    name: str
-    email: str
+class Login(BaseModel):
     login: str
     password: str
 
