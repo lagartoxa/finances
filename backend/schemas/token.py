@@ -3,12 +3,14 @@
 from pydantic import BaseModel
 from typing import Optional
 
+from .api import APISchema
 
-class Token(BaseModel):
+
+class TokenAPISchema(APISchema):
     access_token: str
     token_type: str
 
 
-class TokenData(BaseModel):
+class TokenDataSchema(BaseModel):
     login: Optional[str] = None
 

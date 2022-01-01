@@ -3,7 +3,7 @@
 from pydantic import BaseModel
 
 
-class DefaultSchema(BaseModel):
+class APISchema(BaseModel):
     success: bool
     reason: str
 

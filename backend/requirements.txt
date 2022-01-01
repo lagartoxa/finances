@@ -4,6 +4,7 @@ openpyxl
 passlib
 psycopg2
 python-jose
+python-multipart
 sqlalchemy
 uvicorn
 

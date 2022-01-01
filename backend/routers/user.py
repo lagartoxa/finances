@@ -2,35 +2,62 @@
 
 from fastapi import (
     APIRouter,
-    Depends
+    Depends,
+    HTTPException,
+    status
 )
+from fastapi.security import OAuth2PasswordRequestForm
+
 from sqlalchemy.orm import Session
+
+from backend.authentication.token import LocalAuthentication
 
 from backend.db.models import User
 from backend.db.models.database import db_session
 from backend.db.repositories.user import UserRepository
+
 from backend.schemas.user import UserSchema
-from backend.schemas.default_schema import DefaultSchema
+from backend.schemas.api import APISchema
+from backend.schemas.token import TokenAPISchema
 
 
 router = APIRouter(tags=["user", ])
 
 
-@router.post("/user/", tags=["user", ], response_model=DefaultSchema)
+@router.post("/user/", tags=["user", ], response_model=APISchema)
 async def create_user(request: UserSchema, db_session: Session = Depends(db_session)):
-    user_dict = dict(request)
     user = User()
 
     with UserRepository(db_session) as user_repository:
-        user.name = user_dict["name"]
-        user.login = user_dict["login"]
-        user.email = user_dict["email"]
-        user.password = user.encrypt_password(user_dict["password"])
+        user.name = request.name
+        user.login = request.login
+        user.email = request.email
+        user.password = user.encrypt_password(request.password)
 
         user_repository.add(user)
 
     return {
         "success": True,
-        "reason": f"User {user.name} created sucessfully"
+        "reason": f"User '{user.name}' created sucessfully"
+    }
+
+
+@router.post("/login", tags=["login", ], response_model=TokenAPISchema)
+async def login(request: OAuth2PasswordRequestForm = Depends(), db_session: Session = Depends(db_session)):
+    user = UserRepository(db_session).one_or_none(login=request.username)
+
+    if not user:
+       raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+
+    if not user.verify_password(request.password):
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+
+    token = LocalAuthentication().create_token({"sub": user.login})
+
+    return {
+        "success": True,
+        "reason": f"User '{user.name}' logged in successfully.",
+        "access_token": token,
+        "token_type": "bearer",
     }
 
